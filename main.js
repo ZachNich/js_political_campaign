@@ -35,18 +35,18 @@ const elizabethCampaign = {
     },
     donationURL: 'giveyourmoneytopolitics.com',
     calendar: {
-        january: 'keep warm',
-        february: 'pay bills',
-        march: 'protest',
-        april: 'umbrellas for all',
-        may: 'spring cleaning',
-        june: 'open waterparks',
-        july: 'lower taxes',
-        august: 'hunting season open',
-        september: 'wake me up when it ends',
-        october: 'spook the other political parties',
-        november: 'prepare for the winter',
-        december: 'decrease work week hours'
+        january: ['keep warm'],
+        february: ['pay bills'],
+        march: ['protest'],
+        april: ['umbrellas for all'],
+        may: ['spring cleaning'],
+        june: ['open waterparks'],
+        july: ['lower taxes'],
+        august: ['hunting season open'],
+        september: ['wake me up when it ends'],
+        october: ['spook the other political parties'],
+        november: ['prepare for the winter'],
+        december: ['decrease work week hours']
     },
     volunteer: [
         {
@@ -77,32 +77,32 @@ const elizabethCampaign = {
         headshot: '#',
         family:
             [
-                husband: {
+                {
                     relation: 'husband',
                     name: 'Jack',
                     photo: '#'
                 },
-                daughter: {
+                {
                     relation: 'daughter',
                     name: 'Jill',
                     photo: '#'
                 },
-                son: {
+                {
                     relation: 'son',
                     name: 'John',
                     photo: '#'
                 }
             ],
         constituents: [
-            nameOne: {
+            {
                 name: 'Ricky',
                 photo: '#'
             },
-            nameTwo: {
+            {
                 name: 'Nicky',
                 photo: '#'
             },
-            nameThree: {
+            {
                 name: 'Micky',
                 photo: '#'
             }
@@ -112,3 +112,62 @@ const elizabethCampaign = {
     mission: 'To promise a better life for all, to try quite hard in my first year, and then to give up and coast for the rest of my political years without making any significant changes.',
     registerURL: 'registertovoteforelizabeth.org'
 }
+console.log(elizabethCampaign);
+
+// making functions to update object properties
+
+const changePlatform = (platTopic, newStatement) => {
+        elizabethCampaign.platform[platTopic] = newStatement;
+    }
+
+const addVolunteer = (person) => {
+    elizabethCampaign.volunteer.push(person);
+}
+
+const addToCalendar = (month, update) => {
+    elizabethCampaign.calendar[month].push(update);
+}
+
+const removeVolunteer = (name) => {
+    elizabethCampaign.volunteer.forEach(person => {
+        if (person.name == name) {
+            elizabethCampaign.volunteer.splice(person, 1);
+        };
+    })
+}
+
+const changeVolunteerSchedule = (name, daysAvailable, timeAvailable) => {
+    elizabethCampaign.volunteer.forEach(person => {
+        if (person.name == name) {
+            person.availability.days = daysAvailable;
+            person.availability.time = timeAvailable;
+        }
+    });
+}
+
+const changeBiography = (newBio) => {
+    elizabethCampaign.biography = newBio;
+}
+
+// calling functions to test them
+
+changePlatform('taxes', 'more taxes actually good');
+changePlatform('drugs', 'government selling drugs good, citizens selling drugs bad');
+const Jack = {
+    name: 'Jack',
+    address: '70 Fort Wood St',
+    email: 'jackalacka@jerry.net',
+    phone: '9098087171',
+    availability: {
+        days: ['Saturday', 'Sunday'],
+        time: 'evening'
+    },
+    activities: ['phones']
+}
+addVolunteer(Jack);
+removeVolunteer('Fabio');
+changeVolunteerSchedule('Sasuke', ['Monday', 'Tuesday', 'Wednesday'], 'morning');
+changeBiography('What is a biography, anyway?');
+addToCalendar('may', 'zach\'s birthday');
+
+console.log(elizabethCampaign);
